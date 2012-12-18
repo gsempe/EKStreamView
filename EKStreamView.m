@@ -98,7 +98,7 @@
     if ([delegate respondsToSelector:@selector(headerForStreamView:)]) {
         headerView = [delegate headerForStreamView:self];
         CGRect f = headerView.frame;
-        f.origin = CGPointMake(columnPadding, cellPadding);
+        f.origin = CGPointMake(0, 0);
         headerView.frame = f;
         
         [contentView addSubview:headerView];
@@ -128,7 +128,7 @@
     }
     
     
-    CGFloat cellHeight = headerView ? headerView.bounds.size.height + cellPadding : cellPadding;
+    CGFloat cellHeight = headerView ? headerView.bounds.size.height : 0;
     for (int i = 0; i < numberOfColumns; i++) {
         [cellHeightsByColumn addObject:[NSMutableArray arrayWithCapacity:20]];
         [rectsForCells addObject:[NSMutableArray arrayWithCapacity:20]];
@@ -179,10 +179,10 @@
     
     if (footerView) {
         CGRect f = footerView.frame;
-        f.origin = CGPointMake(columnPadding, maxHeight);
+        f.origin = CGPointMake(0, maxHeight);
         footerView.frame = f;
         
-        maxHeight += footerView.bounds.size.height + cellPadding;
+        maxHeight += footerView.bounds.size.height;
     }
     
     self.contentSize = CGSizeMake(0.0f, maxHeight);
